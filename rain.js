@@ -1,39 +1,49 @@
 var stdin = process.openStdin();
+function findMin(input1, input2){
+    if(input1 > input2){
+        return input2
+    } else{
+        return input1
+    }
+}
+
 stdin.addListener("data", function(d) {
     var input  = d.toString().split(" ").map(value => {
         return parseInt(value)
     })
-    var totalRain = 0;
-    var i,j
-    for(i =0;i< input.length; i++){
-        console.log("value i", i)
-        var eye = input[i]
-        if(input[i] <= 1 ){
+    let totalRain = 0;
+    for(let i=0; i<input.length; i++){
+        
+        let currBlock = input[i]
+        let max = 1
+        console.log("value of I" , i, currBlock)
+        if(currBlock <= 1){
             continue;
         }
-        var roundRain = [] 
-        console.log("eye",eye, i)
-        for(j = i+1; j< input.length; j++){
-            if(input[j] == 0){
+        for(let j = i+1; j < input.length; j++){
+            console.log("value of J" , j,max)
+            let block = input[j]
+            if(block == 0){
+                let tempCal = findMin(max, currBlock)
+                for(let k = i+1; k<j; k++){
+                    totalRain += tempCal - input[k]
+                }
+                i = j -1;
                 break;
             }
-            if(input[j] == eye ){
-                i = j;
-                break;
+            if(block >= max){
+                max = block
             }
-            if(eye < input[j]){
-                i = j;
+            if(max >= currBlock){
+                let tempCal = findMin(max, currBlock)
+                for(let k = i+1; k<j; k++){
+                    totalRain += tempCal - input[k]
+                }
+                i = j -1;
                 break;
-            }
-            if(eye > input[j]){
-                console.log("add",input[j])
-                roundRain.push(input[j])
             }
         }
-        console.log("last",input[i], i)
-        roundRain.map(rain => {
-            totalRain += eye-rain
-        })
+        console.log("totalRain in round",totalRain)
     }
     console.log(totalRain)
     return 0;
