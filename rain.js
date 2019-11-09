@@ -19,7 +19,7 @@ stdin.addListener("data", function(d) {
         if(currBlock <= 1){
             continue;
         }
-        for(let j = i+1; j < input.length; j++){s
+        for(let j = i+1; j < input.length; j++){
             let block = input[j]
             if(block == 0){
                 let tempCal = findMin(max, currBlock)
