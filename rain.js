@@ -16,12 +16,10 @@ stdin.addListener("data", function(d) {
         
         let currBlock = input[i]
         let max = 1
-        console.log("value of I" , i, currBlock)
         if(currBlock <= 1){
             continue;
         }
-        for(let j = i+1; j < input.length; j++){
-            console.log("value of J" , j,max)
+        for(let j = i+1; j < input.length; j++){s
             let block = input[j]
             if(block == 0){
                 let tempCal = findMin(max, currBlock)
@@ -43,7 +41,6 @@ stdin.addListener("data", function(d) {
                 break;
             }
         }
-        console.log("totalRain in round",totalRain)
     }
     console.log(totalRain)
     return 0;
